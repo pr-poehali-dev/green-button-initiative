@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 
 const Index = () => {
@@ -9,12 +8,12 @@ const Index = () => {
           Добро пожаловать!
         </h1>
         <p className="text-xl text-gray-600 mb-8">
-          Нажмите на красивую зеленую кнопку ниже
+          Нажмите на красивую красную кнопку ниже
         </p>
-        
-        <Button 
-          className="bg-emerald-500 hover:bg-emerald-600 text-white font-medium py-2 px-6 rounded-md shadow-md hover:shadow-lg transition-all duration-200 transform hover:-translate-y-1"
-          onClick={() => alert('Вы нажали на зеленую кнопку!')}
+
+        <Button
+          className="bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-6 rounded-md shadow-md hover:shadow-lg transition-all duration-200 transform hover:-translate-y-1"
+          onClick={() => alert("Вы нажали на красную кнопку!")}
         >
           Нажми меня
         </Button>

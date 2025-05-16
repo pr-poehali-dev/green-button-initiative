@@ -13,7 +13,7 @@ const Index = () => {
         const nextGreenId = id === 9 ? 1 : id + 1;
         setGreenButtonId(nextGreenId);
         alert(
-          `Вы нажали на кнопку ${id}! Кнопка ${nextGreenId} теперь зеленая.`,
+          `Вы нажали на кнопку ${id}! Кнопка ${nextGreenId} теперь красная.`,
         );
       },
     };
@@ -26,15 +26,15 @@ const Index = () => {
           Добро пожаловать!
         </h1>
         <p className="text-xl text-gray-600 mb-8">
-          Нажмите на кнопку, и следующая станет зеленой
+          Нажмите на кнопку, и следующая станет красной
         </p>
 
         <div className="grid grid-cols-3 gap-4 max-w-2xl mx-auto">
           {buttons.map((button) => {
-            const isGreen = button.id === greenButtonId;
-            const bgColor = isGreen
-              ? "bg-emerald-500 hover:bg-emerald-600"
-              : "bg-red-500 hover:bg-red-600";
+            const isActive = button.id === greenButtonId;
+            const bgColor = isActive
+              ? "bg-red-500 hover:bg-red-600"
+              : "bg-blue-500 hover:bg-blue-600";
             return (
               <Button
                 key={button.id}
@@ -42,8 +42,8 @@ const Index = () => {
                 onClick={button.onClick}
               >
                 {button.label}
-                {isGreen && (
-                  <span className="block text-xs mt-1">Я зеленая!</span>
+                {isActive && (
+                  <span className="block text-xs mt-1">Я красная!</span>
                 )}
               </Button>
             );

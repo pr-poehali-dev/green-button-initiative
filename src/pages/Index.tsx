@@ -1,11 +1,23 @@
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
 const Index = () => {
-  const buttons = Array.from({ length: 9 }, (_, index) => ({
-    id: index + 1,
-    label: `Кнопка ${index + 1}`,
-    onClick: () => alert(`Вы нажали на кнопку ${index + 1}!`),
-  }));
+  const [greenButtonId, setGreenButtonId] = useState<number | null>(null);
+
+  const buttons = Array.from({ length: 9 }, (_, index) => {
+    const id = index + 1;
+    return {
+      id,
+      label: `Кнопка ${id}`,
+      onClick: () => {
+        const nextGreenId = id === 9 ? 1 : id + 1;
+        setGreenButtonId(nextGreenId);
+        alert(
+          `Вы нажали на кнопку ${id}! Кнопка ${nextGreenId} теперь зеленая.`,
+        );
+      },
+    };
+  });
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-4">
@@ -14,19 +26,28 @@ const Index = () => {
           Добро пожаловать!
         </h1>
         <p className="text-xl text-gray-600 mb-8">
-          Выберите одну из красных кнопок ниже
+          Нажмите на кнопку, и следующая станет зеленой
         </p>
 
         <div className="grid grid-cols-3 gap-4 max-w-2xl mx-auto">
-          {buttons.map((button) => (
-            <Button
-              key={button.id}
-              className="bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-md shadow-md hover:shadow-lg transition-all duration-200 transform hover:-translate-y-1 min-h-16"
-              onClick={button.onClick}
-            >
-              {button.label}
-            </Button>
-          ))}
+          {buttons.map((button) => {
+            const isGreen = button.id === greenButtonId;
+            const bgColor = isGreen
+              ? "bg-emerald-500 hover:bg-emerald-600"
+              : "bg-red-500 hover:bg-red-600";
+            return (
+              <Button
+                key={button.id}
+                className={`${bgColor} text-white font-medium py-2 px-4 rounded-md shadow-md hover:shadow-lg transition-all duration-200 transform hover:-translate-y-1 min-h-16`}
+                onClick={button.onClick}
+              >
+                {button.label}
+                {isGreen && (
+                  <span className="block text-xs mt-1">Я зеленая!</span>
+                )}
+              </Button>
+            );
+          })}
         </div>
       </div>
     </div>
